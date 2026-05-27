@@ -406,7 +406,7 @@ header {
 
 
 .card-title {
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 2.3vw, 1.8rem);
   margin-bottom: 15px;
   color: var(--color-gold);
 }
