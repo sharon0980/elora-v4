@@ -2,13 +2,13 @@
  * ELORA EVENTOS - 3D Scroll-Flight Exhibition Gallery Engine
  */
 
-// Complete Exhibition Database: 31 Event Types & Services
+// Complete Exhibition Database: 31 Audited, Relevant Event Types & Services
 const EXHIBITIONS_LIST = [
   {
     title: "Media Conferences",
     category: "Corporate Events",
     brief: "Sleek presentation stages, precise microphone setups, and high-speed media desks designed to manage press coverage professionally.",
-    img: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=600"
   },
   {
     title: "Seminars",
@@ -20,7 +20,7 @@ const EXHIBITIONS_LIST = [
     title: "Management Events",
     category: "Corporate Events",
     brief: "Corporate retreats, leadership panels, and review summits arranged in structured layouts to foster executive collaboration.",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600"
   },
   {
     title: "Training Programs",
@@ -32,25 +32,25 @@ const EXHIBITIONS_LIST = [
     title: "Launching Events",
     category: "Corporate Events",
     brief: "Product reveal curtains, high-intensity spot lights, laser arrays, and smoke FX to create massive impact for incoming products.",
-    img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600"
   },
   {
     title: "Annual Functions",
     category: "Corporate Events",
     brief: "Corporate celebrations, milestone anniversaries, soundstages, and custom lighting screens to commemorate company success.",
-    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600"
   },
   {
     title: "Promotional Events",
     category: "Corporate Events",
     brief: "Experiential pop-up booths, high-traffic banners, and lead capture points to drive public product interaction.",
-    img: "https://images.unsplash.com/photo-1482440308425-276ad0f28b19?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1531058020387-3be344559be6?q=80&w=600"
   },
   {
     title: "Brand Promotions",
     category: "Corporate Events",
     brief: "Thematic brand displays, logo backdrops, photo stations, and product showcases built around distinct corporate guidelines.",
-    img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600"
   },
   {
     title: "Business Meetings",
@@ -62,25 +62,25 @@ const EXHIBITIONS_LIST = [
     title: "Royal Weddings",
     category: "Adult Events",
     brief: "Bespoke floral architecture, traditional jasmine drapes, mandapam structures, and elegant lighting for elite destination weddings.",
-    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?q=80&w=600"
   },
   {
     title: "Milestone Birthdays",
     category: "Adult Events",
     brief: "Premium social gather setups, custom neon signs, champagne towers, and outdoor cocktail bars to celebrate major milestones.",
-    img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=600"
   },
   {
     title: "Celebration of Life",
     category: "Adult Events",
     brief: "Intimate, warm, and highly respectful family memorial gathering coordinates designed to celebrate legacy with grace.",
-    img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600"
   },
   {
     title: "Baby Showers",
     category: "Adult Events",
     brief: "Elegant high-tea catering, pastel balloon canopies, comfortable mother lounge setups, and fun baby shower games.",
-    img: "https://images.unsplash.com/photo-1519225495810-7512c696505a?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=600"
   },
   {
     title: "Anniversary Parties",
@@ -92,13 +92,13 @@ const EXHIBITIONS_LIST = [
     title: "Engagement Parties",
     category: "Adult Events",
     brief: "Matrimonial ring ceremony staging, background acoustics, floral arches, and fine dining layouts for welcoming family.",
-    img: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600"
   },
   {
     title: "Retirement Parties",
     category: "Adult Events",
     brief: "Respectful milestones, career collage screens, keynote microphones, and family banquets to celebrate career achievements.",
-    img: "https://images.unsplash.com/photo-1504963642544-7f8e8683c5b5?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1543807535-eceef0bc6599?q=80&w=600"
   },
   {
     title: "Graduation Parties",
@@ -110,13 +110,13 @@ const EXHIBITIONS_LIST = [
     title: "Holiday Parties",
     category: "Adult Events",
     brief: "Festive styling, warm fairy lights, cocktail bars, themed tablescapes, and dance floors for corporate or family holiday gathers.",
-    img: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600"
   },
   {
     title: "Productions & Shoots",
     category: "Adult Events",
     brief: "Custom photo backdrops, lighting grids, camera tracks, and soundstages for video recordings or commercial media shoots.",
-    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=600"
   },
   {
     title: "Kids' Birthdays",
@@ -128,31 +128,31 @@ const EXHIBITIONS_LIST = [
     title: "Summer Celebrations",
     category: "Children Events",
     brief: "Poolside children's play rigs, cooling juice bars, water slides, and interactive outdoor sports setups.",
-    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1501854140801-50d01698950ba?q=80&w=600"
   },
   {
     title: "Kitty Parties",
     category: "Children Events",
     brief: "Playful indoor socials, themed finger food buffets, board game coordinates, and colorful setups for social groups.",
-    img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600"
   },
   {
     title: "Baptisms & Christenings",
     category: "Children Events",
     brief: "Pure white and gold naming ceremonies, floral-rich cradles, pathway candles, and elegant family banquet luncheons.",
-    img: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1519689680058-324335c77ebe?q=80&w=600"
   },
   {
     title: "Bridal Makeup",
     category: "Services",
     brief: "Premium vanity setups, professional bridal artists, and luxury beauty consultations for complete matrimonial preparation.",
-    img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600"
   },
   {
     title: "Creative Photography",
     category: "Services",
     brief: "High-fidelity camera rigs, candid captures, wedding reels direction, and safe digital delivery coordinates.",
-    img: "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=600"
   },
   {
     title: "Event Management",
@@ -170,7 +170,7 @@ const EXHIBITIONS_LIST = [
     title: "Travels & Logistics",
     category: "Services",
     brief: "Luxury guest transport fleets, entry validation gates, airport pickups, and hospitality booking coordinates.",
-    img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600"
+    img: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600"
   },
   {
     title: "Musical Events",
@@ -193,7 +193,7 @@ const EXHIBITIONS_LIST = [
 ];
 
 // Global Variables
-let scene, camera, renderer, particles;
+let scene, camera, renderer, particles, tunnel;
 const cardsArray = [];
 const tempV = new THREE.Vector3();
 let mouseX = 0, mouseY = 0;
@@ -202,6 +202,10 @@ const clock = new THREE.Clock();
 
 // Target Z bounds based on scroll height
 let targetZ = 60; // Start at Z = 60 (looking at first card)
+
+// Custom cursor coordinates
+let cursorX = -100, cursorY = -100;
+let trailX = -100, trailY = -100;
 
 document.addEventListener('DOMContentLoaded', () => {
   initThree();
@@ -258,6 +262,19 @@ function initThree() {
 
   particles = new THREE.Points(geometry, material);
   scene.add(particles);
+
+  // Rotating grid wireframe cylinder (Flight Tunnel)
+  const tunnelGeom = new THREE.CylinderGeometry(8, 8, 150, 16, 30, true);
+  const tunnelMat = new THREE.MeshBasicMaterial({
+    color: 0xD4AF37,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.035, // extremely subtle grid lines
+    side: THREE.DoubleSide
+  });
+  tunnel = new THREE.Mesh(tunnelGeom, tunnelMat);
+  tunnel.rotation.x = Math.PI / 2; // align along Z axis
+  scene.add(tunnel);
 }
 
 // Robust click tracking for elements moving in 3D WebGL space
@@ -354,6 +371,16 @@ function initListeners() {
     // Smooth target coordinates (tilt scale)
     targetX = mouseX * 2.2;
     targetY = mouseY * 2.2;
+
+    // Track coordinates for our custom cursor
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+
+    const cursorDot = document.getElementById('custom-cursor');
+    if (cursorDot) {
+      cursorDot.style.left = `${cursorX}px`;
+      cursorDot.style.top = `${cursorY}px`;
+    }
   });
 
   // Map Page Scroll Position to Camera Z Position (Flight mechanism)
@@ -364,6 +391,38 @@ function initListeners() {
     
     // Map scroll percentage to camera Z coordinates (flight from Z=60 to Z=-75)
     targetZ = 60 - (scrollFraction * 135);
+
+    // Smooth transform / fade for centered intro brand logo on scroll
+    const introLogo = document.getElementById('gallery-hero-logo');
+    if (introLogo) {
+      if (scrollY > 350) {
+        introLogo.style.display = 'none';
+      } else {
+        introLogo.style.display = 'flex';
+        const logoOpacity = Math.max(0, 1 - scrollY / 220);
+        const logoScale = Math.max(0.7, 1 - scrollY / 600);
+        const logoTranslateZ = -scrollY * 0.8;
+        introLogo.style.opacity = logoOpacity;
+        introLogo.style.transform = `translate(-50%, -50%) translate3d(0, 0, ${logoTranslateZ}px) scale(${logoScale})`;
+      }
+    }
+  });
+
+  // Delegate mouse hover triggers for custom cursor expansion
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('a, button, .floating-card-3d, .interactive-el, input, textarea');
+    if (target) {
+      document.getElementById('custom-cursor')?.classList.add('hover');
+      document.getElementById('custom-cursor-trail')?.classList.add('hover');
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('a, button, .floating-card-3d, .interactive-el, input, textarea');
+    if (target) {
+      document.getElementById('custom-cursor')?.classList.remove('hover');
+      document.getElementById('custom-cursor-trail')?.classList.remove('hover');
+    }
   });
 
   // Brief modal close triggers
@@ -405,13 +464,29 @@ function animate() {
   const time = clock.getElapsedTime();
   const isMobile = window.innerWidth < 768;
 
+  // 1. Smoothly interpolate trailing cursor outer ring
+  if (!isMobile) {
+    const cursorTrail = document.getElementById('custom-cursor-trail');
+    if (cursorTrail) {
+      trailX += (cursorX - trailX) * 0.15;
+      trailY += (cursorY - trailY) * 0.15;
+      cursorTrail.style.left = `${trailX}px`;
+      cursorTrail.style.top = `${trailY}px`;
+    }
+  }
+
+  // 2. Gently rotate flight tunnel grid lines
+  if (tunnel) {
+    tunnel.rotation.z = time * 0.015;
+  }
+
   if (isMobile) {
     // Gently wave/tilt camera target coordinates automatically over time on mobile
     targetX = Math.sin(time * 0.4) * 0.9;
     targetY = Math.cos(time * 0.35) * 0.5;
   }
 
-  // 1. Lerp Camera Position (Scroll flight + Cursor Parallax tilt)
+  // 3. Lerp Camera Position (Scroll flight + Cursor Parallax tilt)
   camera.position.z += (targetZ - camera.position.z) * 0.1;
   camera.position.x += (targetX - camera.position.x) * 0.08;
   camera.position.y += (targetY - camera.position.y) * 0.08;
@@ -419,7 +494,7 @@ function animate() {
   // Gently tilt camera toward path center
   camera.lookAt(new THREE.Vector3(0, 0, camera.position.z - 15));
 
-  // 2. Cosmic particle movement
+  // 4. Cosmic particle movement
   if (particles) {
     const positionAttr = particles.geometry.attributes.position.array;
     const count = positionAttr.length / 3;
@@ -441,7 +516,7 @@ function animate() {
     particles.rotation.z = time * 0.005;
   }
 
-  // 3. Project 3D Card Coordinates onto 2D viewport coordinates
+  // 5. Project 3D Card Coordinates onto 2D viewport coordinates
   cardsArray.forEach(card => {
     // Add simple float wiggles to X/Y using math equations
     const curX = card.x + Math.sin(time * 0.8 + card.wobbleOffset) * 0.06;
@@ -489,6 +564,12 @@ function animate() {
         opacity = (distToCam - 3.2) / 4.8; // soft fade out right before camera passing
       }
       opacity = Math.max(0, Math.min(1, opacity));
+
+      // SENSATIONAL SCROLL REVEAL: Cards remain hidden/faded when logo is active
+      const scrollY = window.scrollY;
+      if (scrollY < 220) {
+        opacity *= Math.max(0, (scrollY - 60) / 160);
+      }
 
       // Update card inline styles
       card.element.style.transform = `translate(-50%, -50%) translate3d(${px}px, ${py}px, 0px) scale(${scale})`;

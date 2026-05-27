@@ -110,6 +110,8 @@ p {
   position: relative;
   z-index: 2;
   pointer-events: none;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .interactive-el {
@@ -384,11 +386,11 @@ header {
 }
 
 .filter-btn.active {
-  background: var(--color-gold-gradient);
+  background: var(--color-gold) !important;
   color: #000000 !important;
-  border-color: var(--color-gold);
-  font-weight: 755;
-  box-shadow: var(--shadow-gold-glow-intense);
+  border-color: var(--color-gold) !important;
+  font-weight: 700;
+  box-shadow: none !important;
 }
 
 /* Gallery More Button Container */
@@ -415,9 +417,9 @@ header {
 }
 
 .more-btn:hover {
-  background: var(--color-gold-gradient);
+  background: var(--color-gold) !important;
   color: #000000 !important;
-  box-shadow: var(--shadow-gold-glow-intense);
+  box-shadow: none !important;
   transform: translateY(-3px);
 }
 
@@ -853,21 +855,22 @@ header {
 .submit-btn {
   width: 100%;
   padding: 16px;
-  background: var(--color-gold-gradient);
+  background: var(--color-gold);
   color: #000000 !important;
   border: none;
   border-radius: 8px;
-  font-weight: 755;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.85rem;
   cursor: pointer;
+  box-shadow: none !important;
   transition: var(--transition-fast);
 }
 
 .submit-btn:hover {
-  filter: brightness(1.1);
-  box-shadow: var(--shadow-gold-glow-intense);
+  background: #E5C158;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15) !important;
 }
 
 /* ==========================================
@@ -1320,6 +1323,178 @@ footer {
   }
   .floating-card-3d span {
     font-size: 0.68rem;
+  }
+}
+
+/* ==========================================
+   8. PREMIUM INTERACTIVE ELEMENTS & INTRO STYLES
+   ========================================== */
+
+/* Custom trailing luxury cursor styles */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+.custom-cursor-trail {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.05s linear, width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+/* Hover states for interactive elements */
+.custom-cursor.hover {
+  background-color: var(--color-white);
+  width: 6px;
+  height: 6px;
+}
+
+.custom-cursor-trail.hover {
+  width: 48px;
+  height: 48px;
+  border-color: var(--color-white);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Centered Intro brand logo card */
+.gallery-hero-logo-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 4;
+  pointer-events: none;
+  width: 90%;
+  max-width: 600px;
+  animation: emergeLogo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.gallery-hero-logo-container img {
+  height: clamp(140px, 20vw, 240px);
+  width: auto;
+  margin-bottom: -10px;
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.25));
+}
+
+.gallery-hero-logo-container h1 {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  color: var(--color-gold);
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+  margin-bottom: 8px;
+}
+
+.gallery-hero-logo-container p {
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  margin-bottom: 40px;
+}
+
+/* Scroll Prompts */
+.scroll-down-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-muted);
+  opacity: 0.85;
+}
+
+.scroll-arrow {
+  font-size: 1.1rem;
+  color: var(--color-gold);
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes emergeLogo {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Additional responsive rules to avoid mobile overflows and stack selectors */
+@media (max-width: 768px) {
+  html, body, .content-wrapper {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+  
+  .custom-cursor,
+  .custom-cursor-trail {
+    display: none !important;
+  }
+  
+  .section-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .contact-text h2 {
+    font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3.2rem) !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .exhibit-filter {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  
+  .filter-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    text-align: center !important;
+    padding: 10px 20px !important;
+    font-size: 0.85rem !important;
   }
 }
 
