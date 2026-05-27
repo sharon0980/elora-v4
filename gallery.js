@@ -260,6 +260,31 @@ function initThree() {
   scene.add(particles);
 }
 
+// Robust click tracking for elements moving in 3D WebGL space
+// Distinguishes tap/click from touch scroll or drag, and works around browser focus drop on moving elements
+function attachRobustClickListener(element, callback) {
+  let startX = 0;
+  let startY = 0;
+  let startTime = 0;
+
+  element.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    startY = e.clientY;
+    startTime = Date.now();
+  });
+
+  element.addEventListener('pointerup', (e) => {
+    const diffX = Math.abs(e.clientX - startX);
+    const diffY = Math.abs(e.clientY - startY);
+    const duration = Date.now() - startTime;
+
+    // Click is valid if movement is within 15px and duration is under 300ms
+    if (diffX < 15 && diffY < 15 && duration < 300) {
+      callback();
+    }
+  });
+}
+
 // Generate the 3D spiral tunnel coordinates for our 31 HTML cards
 function build3DHTMLCards() {
   const container = document.getElementById('floating-gallery');
@@ -286,8 +311,8 @@ function build3DHTMLCards() {
       <span>${item.category}</span>
     `;
 
-    // Clicks open the details brief modal
-    cardEl.addEventListener('click', () => {
+    // Clicks open the details brief modal via robust tracker
+    attachRobustClickListener(cardEl, () => {
       openDetailPopup(item);
     });
 
@@ -427,7 +452,7 @@ function animate() {
 
       // Scale card size and opacity based on depth distance
       // Opposing depth: closer = bigger, further = smaller
-      const scale = Math.max(0.15, Math.min(1.4, 6.5 / distToCam));
+      const scale = Math.max(0.45, Math.min(1.8, 9.5 / distToCam));
       
       // Soft fade limits (blend into background void)
       let opacity = 1.0;

@@ -16,6 +16,23 @@
   <!-- BACKGROUND THREE.JS CANVAS -->
   <canvas id="webgl-canvas"></canvas>
 
+  <!-- 3D FLOATING CONTAINER -->
+  <div class="gallery-container-3d" id="floating-gallery">
+    <!-- Cards will be dynamically injected here by gallery.js to keep markup clean -->
+  </div>
+
+  <!-- DETAIL BRIEF POPUP -->
+  <div class="brief-popup-overlay" id="brief-popup">
+    <div class="brief-popup-content">
+      <button class="close-brief-btn" id="close-brief"><i class="fa-solid fa-xmark"></i></button>
+      <span class="brief-category" id="popup-category">Category</span>
+      <h2 class="brief-title" id="popup-title">Event Title</h2>
+      <img class="brief-img" id="popup-img" src="" alt="Event Thumbnail">
+      <p class="brief-desc" id="popup-desc">Brief details about this specific concept category.</p>
+      <button class="submit-btn" id="popup-cta-btn" onclick="document.getElementById('brief-popup').classList.remove('active'); window.location.href = 'index.html#contact';">Get Quote</button>
+    </div>
+  </div>
+
   <div class="content-wrapper" style="pointer-events: none;">
     
     <!-- STATIC NAVIGATION HEADER -->
@@ -29,26 +46,9 @@
       </ul>
     </header>
 
-    <!-- 3D FLOATING CONTAINER -->
-    <div class="gallery-container-3d" id="floating-gallery">
-      <!-- Cards will be dynamically injected here by gallery.js to keep markup clean -->
-    </div>
-
     <!-- PAGE INSTRUCTION FOOTER -->
     <div class="gallery-instruction">
       <span>Scroll to Fly • Move Mouse to Tilt View • Click to Inspect</span>
-    </div>
-
-    <!-- DETAIL BRIEF POPUP -->
-    <div class="brief-popup-overlay" id="brief-popup" style="pointer-events: auto;">
-      <div class="brief-popup-content">
-        <button class="close-brief-btn" id="close-brief"><i class="fa-solid fa-xmark"></i></button>
-        <span class="brief-category" id="popup-category">Category</span>
-        <h2 class="brief-title" id="popup-title">Event Title</h2>
-        <img class="brief-img" id="popup-img" src="" alt="Event Thumbnail">
-        <p class="brief-desc" id="popup-desc">Brief details about this specific concept category.</p>
-        <button class="submit-btn" id="popup-cta-btn" onclick="document.getElementById('brief-popup').classList.remove('active'); window.location.hash = 'contact';">Consult Atelier</button>
-      </div>
     </div>
 
   </div>
