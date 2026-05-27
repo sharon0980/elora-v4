@@ -406,7 +406,7 @@ header {
 
 
 .card-title {
-  font-size: clamp(1.4rem, 2.3vw, 1.8rem);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
   margin-bottom: 15px;
   color: var(--color-gold);
 }
@@ -795,6 +795,10 @@ footer {
    RESPONSIVENESS (MOBILE/PC)
    ========================================== */
 @media (max-width: 1024px) {
+  .showcase-card {
+    padding: 30px 24px;
+  }
+
   .modal-content {
     width: 75%;
     padding: 60px 6%;
@@ -808,6 +812,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .showcase-card {
+    padding: 25px 20px;
+  }
+
   header {
     padding: 20px 6%;
   }
