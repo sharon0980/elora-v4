@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ELORA EVENTOS - Complete Interactive 3D Flight Exhibition. Scroll through all corporate, social, children's events, and premium services.">
+  <title>Complete Exhibition Gallery | ELORA EVENTOS</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="gallery-body">
+
+  <!-- BACKGROUND THREE.JS CANVAS -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="content-wrapper" style="pointer-events: none;">
+    
+    <!-- STATIC NAVIGATION HEADER -->
+    <header class="interactive-el" style="position: fixed; background: rgba(7, 7, 7, 0.5); backdrop-filter: blur(15px); pointer-events: auto;">
+      <a href="index.html" class="brand-logo" style="text-decoration:none; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="back-btn" style="margin-bottom: 0; font-size: 0.85rem;"><i class="fa-solid fa-arrow-left-long"></i> Back to Home</a></li>
+      </ul>
+    </header>
+
+    <!-- 3D FLOATING CONTAINER -->
+    <div class="gallery-container-3d" id="floating-gallery">
+      <!-- Cards will be dynamically injected here by gallery.js to keep markup clean -->
+    </div>
+
+    <!-- PAGE INSTRUCTION FOOTER -->
+    <div class="gallery-instruction">
+      <span>Scroll to Fly • Move Mouse to Tilt View • Click to Inspect</span>
+    </div>
+
+    <!-- DETAIL BRIEF POPUP -->
+    <div class="brief-popup-overlay" id="brief-popup" style="pointer-events: auto;">
+      <div class="brief-popup-content">
+        <button class="close-brief-btn" id="close-brief"><i class="fa-solid fa-xmark"></i></button>
+        <span class="brief-category" id="popup-category">Category</span>
+        <h2 class="brief-title" id="popup-title">Event Title</h2>
+        <img class="brief-img" id="popup-img" src="" alt="Event Thumbnail">
+        <p class="brief-desc" id="popup-desc">Brief details about this specific concept category.</p>
+        <button class="submit-btn" id="popup-cta-btn" onclick="document.getElementById('brief-popup').classList.remove('active'); window.location.hash = 'contact';">Consult Atelier</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
