@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ELORA EVENTOS - Luxury 3D Portfolio and Virtual Gallery Space. Managing weddings, corporate conclaves, brand promotions, private parties, and creative productions in Kerala.">
+  <title>ELORA EVENTOS | 3D Virtual Gallery Space</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================
+       THREE.JS CANVAS (FIXED BACKGROUND)
+       ========================================== -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- ==========================================
+       SITE HTML WRAPPER (Z-INDEX OVER CANVAS)
+       ========================================== -->
+  <div class="content-wrapper">
+    
+    <!-- NAVIGATION -->
+    <header class="interactive-el">
+      <div class="brand-logo" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero">Exhibition</a></li>
+        <li><a href="#gallery">Showcases</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-heading-wrapper">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" class="hero-logo-img">
+        <h1 class="hero-title">Elora Eventos</h1>
+      </div>
+      <p class="hero-subtitle">Crafting Unforgettable Moments</p>
+      
+      <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll to Explore</span>
+      </div>
+    </section>
+
+    <!-- GALLERY SHOWCASE SECTION -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-header">
+        <span class="section-label">Selected Exhibitions</span>
+        <h2 class="section-title">Our Event Architectures</h2>
+      </div>
+
+      <!-- Grid of 5 primary cards representing the 19 event types -->
+      <div class="cards-grid interactive-el">
+        
+        <!-- Card 1: Corporate -->
+        <a href="corporate.html" class="showcase-card" data-category="corporate">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800');"></div>
+          <span class="card-num">01</span>
+          <div class="card-content">
+            <h3 class="card-title">Corporate &amp; Conclaves</h3>
+            <p class="card-desc">Highly structured business summits, media conferences, seminars, training programs, and executive meetings engineered with pristine technical layouts.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2: Brand & Launches -->
+        <a href="promotions.html" class="showcase-card" data-category="promotions">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800');"></div>
+          <span class="card-num">02</span>
+          <div class="card-content">
+            <h3 class="card-title">Brand &amp; Launches</h3>
+            <p class="card-desc">Innovative product launches, promotional campaigns, and brand activation programs designed to capture media attention and client engagement.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: Weddings -->
+        <a href="wedding.html" class="showcase-card" data-category="weddings">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800');"></div>
+          <span class="card-num">03</span>
+          <div class="card-content">
+            <h3 class="card-title">Royal Weddings</h3>
+            <p class="card-desc">Grand traditional ceremonies, bespoke engagement parties, and milestone anniversaries. We handle structural mandapams and premium hospitality.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4: Private Parties -->
+        <a href="parties.html" class="showcase-card" data-category="parties">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800');"></div>
+          <span class="card-num">04</span>
+          <div class="card-content">
+            <h3 class="card-title">Private Parties</h3>
+            <p class="card-desc">Elegant birthday galas, baby showers, graduation parties, retirement parties, holiday gatherings, and celebration of life events styled in theme decors.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 5: Productions -->
+        <a href="productions.html" class="showcase-card" data-category="productions">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');"></div>
+          <span class="card-num">05</span>
+          <div class="card-content">
+            <h3 class="card-title">Productions</h3>
+            <p class="card-desc">Bespoke photography and video shoots, commercial sets, and massive annual functions coordinated with advanced AV setups and lighting schemes.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-layout interactive-el">
+        <div class="contact-text">
+          <h2>Design Your Masterpiece</h2>
+          <p>Whether it is an industrial summit or a royal ceremony, our consultants are ready to conceptualize your visual layouts and coordinate execution.</p>
+          <ul class="contact-briefs">
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-val">+91 98765 43210</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-val">atelier@eloraeventos.com</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-val">Panampilly Nagar, Kochi, Kerala</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); alert('We have received your request. An Elora consultant will contact you with a 3D concept layout outline.');">
+            <div class="input-box">
+              <input type="text" id="name" placeholder=" " required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-box">
+              <input type="email" id="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <input type="text" id="event" placeholder=" ">
+              <label for="event">Event Category (e.g. Seminar)</label>
+            </div>
+            <div class="input-box">
+              <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>
+              <label for="message">Vision Outline</label>
+            </div>
+            <button type="submit" class="submit-btn">Consult Our Atelier</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 Elora Eventos. Monochromatic 3D Virtual Gallery. Kochi, Kerala.
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

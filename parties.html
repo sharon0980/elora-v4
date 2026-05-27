@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elora Eventos - Private Parties Walkthrough. View structural phase setups for birthdays, baby showers, graduations, and holiday fests.">
+  <title>Private Parties Walkthrough | ELORA EVENTOS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- THREE.JS BACKGROUND CANVAS -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="content-wrapper">
+    
+    <!-- NAVIGATION -->
+    <header class="interactive-el">
+      <a href="index.html" class="brand-logo" style="text-decoration:none; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Exhibition</a></li>
+        <li><a href="index.html#gallery">Showcases</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- MAIN DETAIL CONTENT -->
+    <main class="detail-page-container interactive-el">
+      
+      <!-- Back to Gallery Link -->
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i> Back to Gallery
+      </a>
+
+      <!-- Header Content -->
+      <div class="modal-header">
+        <span class="modal-category">Exhibition 04</span>
+        <h1 class="modal-title">Private Parties</h1>
+        <p class="modal-intro">We design chic, vibrant, and highly personalized spaces to celebrate life's milestones, ensuring each gathering is intimate and memorable.</p>
+      </div>
+
+      <!-- Specific Categories tags -->
+      <div class="subtypes-box">
+        <h4 class="subtypes-title">Specializations Offered</h4>
+        <ul class="subtypes-list">
+          <li>Birthdays</li>
+          <li>Baby Showers</li>
+          <li>Graduation Parties</li>
+          <li>Retirement Parties</li>
+          <li>Holiday Parties</li>
+          <li>Celebration of Life</li>
+        </ul>
+      </div>
+
+      <!-- Walkthrough Timeline -->
+      <div class="walkthrough-map">
+        <h3 class="walkthrough-header">Structure Walkthrough</h3>
+        <div class="timeline-box">
+          <div class="timeline-flow-line"></div>
+          
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 01: Conception</span>
+            <h4 class="timeline-heading">Theme &amp; Tone Calibration</h4>
+            <p class="timeline-body">Drafting color schemes, custom neon slogan sign designs, customized dining layouts, and music selections matching the celebration tone.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1504963642544-7f8e8683c5b5?q=80&w=800" alt="Theme Idea Formulation">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 02: Installation</span>
+            <h4 class="timeline-heading">Atmospheric Venue Dress</h4>
+            <p class="timeline-body">Suspending balloon arches, placing custom backdrop walls, installing candy tables, setting up poolside lounge couches, and styling main cocktail bars.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800" alt="Party Space Staging">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 03: Celebration</span>
+            <h4 class="timeline-heading">The Toast &amp; Ceremonial Cue</h4>
+            <p class="timeline-body">Running MC coordinates, organizing the cake-cutting ceremony, opening champagne towers, and managing gourmet buffet service flow.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?q=80&w=800" alt="Anniversary Celebration Toast">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 04: Completion</span>
+            <h4 class="timeline-heading">Dance &amp; Legacy Captures</h4>
+            <p class="timeline-body">Opening outdoor fairy-lit dance floors with live DJ sets, handing out personalized party favor boxes, and organizing polaroid photograph collections.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1496024840928-4c417adf211d?q=80&w=800" alt="DJ Dancefloor Gathering">
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-layout interactive-el">
+        <div class="contact-text">
+          <h2>Design Your Masterpiece</h2>
+          <p>Whether it is an industrial summit or a royal ceremony, our consultants are ready to conceptualize your visual layouts and coordinate execution.</p>
+          <ul class="contact-briefs">
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-val">+91 98765 43210</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-val">atelier@eloraeventos.com</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-val">Panampilly Nagar, Kochi, Kerala</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); alert('We have received your request. An Elora consultant will contact you with a 3D concept layout outline.');">
+            <div class="input-box">
+              <input type="text" id="name" placeholder=" " required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-box">
+              <input type="email" id="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <input type="text" id="event" value="Private Parties" placeholder=" " readonly>
+              <label for="event">Event Category</label>
+            </div>
+            <div class="input-box">
+              <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>
+              <label for="message">Vision Outline</label>
+            </div>
+            <button type="submit" class="submit-btn">Consult Our Atelier</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 Elora Eventos. Monochromatic 3D Virtual Gallery. Kochi, Kerala.
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

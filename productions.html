@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elora Eventos - Creative Productions Walkthrough. View structural phase setups for photography shoots, video shoots, and annual functions.">
+  <title>Creative Productions Walkthrough | ELORA EVENTOS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- THREE.JS BACKGROUND CANVAS -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="content-wrapper">
+    
+    <!-- NAVIGATION -->
+    <header class="interactive-el">
+      <a href="index.html" class="brand-logo" style="text-decoration:none; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Exhibition</a></li>
+        <li><a href="index.html#gallery">Showcases</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- MAIN DETAIL CONTENT -->
+    <main class="detail-page-container interactive-el">
+      
+      <!-- Back to Gallery Link -->
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i> Back to Gallery
+      </a>
+
+      <!-- Header Content -->
+      <div class="modal-header">
+        <span class="modal-category">Exhibition 05</span>
+        <h1 class="modal-title">Creative Productions</h1>
+        <p class="modal-intro">We construct precision soundstages, customized backdrops, and advanced multi-camera recording environments for commercial media and massive functions.</p>
+      </div>
+
+      <!-- Specific Categories tags -->
+      <div class="subtypes-box">
+        <h4 class="subtypes-title">Specializations Offered</h4>
+        <ul class="subtypes-list">
+          <li>Photography Shoots</li>
+          <li>Video Shoots</li>
+          <li>Annual Functions</li>
+        </ul>
+      </div>
+
+      <!-- Walkthrough Timeline -->
+      <div class="walkthrough-map">
+        <h3 class="walkthrough-header">Structure Walkthrough</h3>
+        <div class="timeline-box">
+          <div class="timeline-flow-line"></div>
+          
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 01: Conception</span>
+            <h4 class="timeline-heading">Storyboard &amp; Frame Mappings</h4>
+            <p class="timeline-body">Aligning scene directors, script sequences, model coordinate positioning, lens dimensions, and camera crane paths to ensure perfect framing schedules.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800" alt="Storyboard Camera Layout">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 02: Installation</span>
+            <h4 class="timeline-heading">Trussing &amp; Lighting Rigging</h4>
+            <p class="timeline-body">Erecting complex aluminum truss structures, softbox lights, spotlights, background drop rolls, color filters, and establishing multi-camera tracks.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800" alt="Studio Light Rigging">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 03: Recording</span>
+            <h4 class="timeline-heading">Fidelity Capture Operations</h4>
+            <p class="timeline-body">Managing live recording triggers, soundboard line captures, director coordinate queues, and backing screen displacements for flawless takes.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800" alt="Camera Shoot Session">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 04: Completion</span>
+            <h4 class="timeline-heading">Post-Production &amp; Edit Delivery</h4>
+            <p class="timeline-body">Post-shoot color grading, sound mixing, CGI blending (if applicable), edit assembly, rendering, and safe digital delivery of the cinematic footage.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=800" alt="Video Editing Render">
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-layout interactive-el">
+        <div class="contact-text">
+          <h2>Design Your Masterpiece</h2>
+          <p>Whether it is an industrial summit or a royal ceremony, our consultants are ready to conceptualize your visual layouts and coordinate execution.</p>
+          <ul class="contact-briefs">
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-val">+91 98765 43210</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-val">atelier@eloraeventos.com</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-val">Panampilly Nagar, Kochi, Kerala</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); alert('We have received your request. An Elora consultant will contact you with a 3D concept layout outline.');">
+            <div class="input-box">
+              <input type="text" id="name" placeholder=" " required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-box">
+              <input type="email" id="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <input type="text" id="event" value="Creative Productions" placeholder=" " readonly>
+              <label for="event">Event Category</label>
+            </div>
+            <div class="input-box">
+              <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>
+              <label for="message">Vision Outline</label>
+            </div>
+            <button type="submit" class="submit-btn">Consult Our Atelier</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 Elora Eventos. Monochromatic 3D Virtual Gallery. Kochi, Kerala.
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

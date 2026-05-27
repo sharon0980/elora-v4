@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elora Eventos - Royal Weddings Walkthrough. View structural phase setups for traditional weddings, engagement parties, and anniversaries.">
+  <title>Royal Weddings Walkthrough | ELORA EVENTOS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- THREE.JS BACKGROUND CANVAS -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="content-wrapper">
+    
+    <!-- NAVIGATION -->
+    <header class="interactive-el">
+      <a href="index.html" class="brand-logo" style="text-decoration:none; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Exhibition</a></li>
+        <li><a href="index.html#gallery">Showcases</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- MAIN DETAIL CONTENT -->
+    <main class="detail-page-container interactive-el">
+      
+      <!-- Back to Gallery Link -->
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i> Back to Gallery
+      </a>
+
+      <!-- Header Content -->
+      <div class="modal-header">
+        <span class="modal-category">Exhibition 03</span>
+        <h1 class="modal-title">Royal Weddings</h1>
+        <p class="modal-intro">We design architectural, floral-rich matrimonial sanctuaries, blending deep traditional elements of Kerala with modern elite hospitality standards.</p>
+      </div>
+
+      <!-- Specific Categories tags -->
+      <div class="subtypes-box">
+        <h4 class="subtypes-title">Specializations Offered</h4>
+        <ul class="subtypes-list">
+          <li>Traditional &amp; Destination Weddings</li>
+          <li>Engagement Parties</li>
+          <li>Anniversary Parties</li>
+        </ul>
+      </div>
+
+      <!-- Walkthrough Timeline -->
+      <div class="walkthrough-map">
+        <h3 class="walkthrough-header">Structure Walkthrough</h3>
+        <div class="timeline-box">
+          <div class="timeline-flow-line"></div>
+          
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 01: Conception</span>
+            <h4 class="timeline-heading">Floral &amp; Space Layout Mappings</h4>
+            <p class="timeline-body">Coordinating Mandapam wood carvings, jasmine garland curtains, ceiling drapes, backstage spaces, and table settings to construct a unified theme.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800" alt="Floral & Space Planning">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 02: Installation</span>
+            <h4 class="timeline-heading">The Mandapam Staging</h4>
+            <p class="timeline-body">Erecting floating stages, glass bridges over pool pathways, custom dome frameworks, spotlight fixtures, and lining pathways with traditional oil lamps.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" alt="Altar Mandapam Setup">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 03: Ceremony</span>
+            <h4 class="timeline-heading">Sacred Rite &amp; Hospitality Execution</h4>
+            <p class="timeline-body">Welcoming guests with classical Nadaswaram, managing the sacred Muhurtham timeline cues, and executing the grand multi-course Sadya dining operations.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800" alt="Traditional Ceremony Feast">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 04: Completion</span>
+            <h4 class="timeline-heading">Reception Gala &amp; Toasts</h4>
+            <p class="timeline-body">Transforming the open-air lawn under thousands of gold fairy lights. Coordinated musician stages, cocktail bars, guest photo spaces, and sky lanterns send-off.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=800" alt="Evening Reception Lawn">
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-layout interactive-el">
+        <div class="contact-text">
+          <h2>Design Your Masterpiece</h2>
+          <p>Whether it is an industrial summit or a royal ceremony, our consultants are ready to conceptualize your visual layouts and coordinate execution.</p>
+          <ul class="contact-briefs">
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-val">+91 98765 43210</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-val">atelier@eloraeventos.com</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-val">Panampilly Nagar, Kochi, Kerala</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); alert('We have received your request. An Elora consultant will contact you with a 3D concept layout outline.');">
+            <div class="input-box">
+              <input type="text" id="name" placeholder=" " required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-box">
+              <input type="email" id="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <input type="text" id="event" value="Royal Weddings" placeholder=" " readonly>
+              <label for="event">Event Category</label>
+            </div>
+            <div class="input-box">
+              <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>
+              <label for="message">Vision Outline</label>
+            </div>
+            <button type="submit" class="submit-btn">Consult Our Atelier</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 Elora Eventos. Monochromatic 3D Virtual Gallery. Kochi, Kerala.
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

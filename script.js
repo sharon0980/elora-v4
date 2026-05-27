@@ -1,0 +1,427 @@
+/**
+ * ELORA EVENTOS - 3D Virtual Gallery Space Engine
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initThreeEngine();
+  initUIScrollReveals();
+  initCardClickZoom();
+  initTimelineProgressFlow();
+});
+
+/* ==========================================
+   1. GLOBAL STATE & DATA
+   ========================================== */
+const EXHIBIT_DATA = {
+  corporate: {
+    category: "Corporate & Conclaves",
+    title: "Executive Business Staging",
+    intro: "We engineer professional environments that facilitate seamless communication, academic knowledge sharing, and commercial deal-making.",
+    subtypes: [
+      "Media Conferences",
+      "Seminars / Industrial Events",
+      "Management Events",
+      "Training Programs",
+      "Business Meetings"
+    ],
+    timeline: [
+      { phase: "Phase 1: Alignment", title: "Agenda & Setup Calibration", body: "We map out presentation schedules, speaker requirements, and custom slide parameters to ensure the technical crew is completely synced." },
+      { phase: "Phase 2: Build", title: "High-Tech Stage Assembly", body: "Installation of gloss-black staging, glass podiums, surround-sound line-arrays, and fine-pitch LED display backdrops." },
+      { phase: "Phase 3: Run", title: "Technical Cue Management", body: "Our backstage directors run seamless transitions for live AV feeds, slides, timers, and Q&A microphone coordinates." },
+      { phase: "Phase 4: Wrap", title: "Attendee Analytics & Media Wrap", body: "We compile attendance check-in metrics, distribute digital media folders, and execute site teardowns." }
+    ]
+  },
+  promotions: {
+    category: "Brand & Launches",
+    title: "Experiential Commercial Shows",
+    intro: "Translating corporate identities and product offerings into interactive, physical spaces that capture media and public attention.",
+    subtypes: [
+      "Launching Events",
+      "Promotional Campaigns",
+      "Brand Promotion Events"
+    ],
+    timeline: [
+      { phase: "Phase 1: Conception", title: "Brand Identity Extraction", body: "We study the product's USP to formulate a spatial theme, lighting palette, and public interaction points." },
+      { phase: "Phase 2: Installation", title: "Experiential Pop-Up Setup", body: "Assembly of custom media walls, fabric installations, product reveal screens, and lighting schemes." },
+      { phase: "Phase 3: Launch", title: "High-Impact Reveal Show", body: "Managing product reveals with synchronized laser light arrays, sound effects, smoke, and press coverage." },
+      { phase: "Phase 4: Engagement", title: "Influencer & Lead Capture", body: "Guiding guests through registration booths, interactive photobooths, and digital QR contact cards." }
+    ]
+  },
+  weddings: {
+    category: "Royal Weddings",
+    title: "Bespoke Matrimonial Art",
+    intro: "We elevate traditional weddings into royal, monumental experiences with exquisite floral architectures and elite guest services.",
+    subtypes: [
+      "Traditional Weddings",
+      "Engagement Parties",
+      "Anniversary Parties"
+    ],
+    timeline: [
+      { phase: "Phase 1: Design", title: "Floral & Structural Mappings", body: "Coordinating floorplans, Mandapam wood carvings, fabric drapes, and traditional jasmine layout schemes." },
+      { phase: "Phase 2: Assembly", title: "Stage & Lighting Rigging", body: "Creating floating structures, warm backdrop spot lighting, traditional oil lamps, and seating arrays." },
+      { phase: "Phase 3: Ceremony", title: "Sacred Hour Hospitality", body: "Greeting guests with instrumental Nadaswaram, coordinating ritual timelines, and plating the grand feast." },
+      { phase: "Phase 4: Reception", title: "Evening Toast & Gala", body: "Transforming the venue with modern fairy lights, live musicians, and champagne table toast setups." }
+    ]
+  },
+  parties: {
+    category: "Private Parties",
+    title: "Elite Social Gatherings",
+    intro: "Curating highly sophisticated and memorable environments for life's personal milestones, from birthdays to memorials.",
+    subtypes: [
+      "Birthdays",
+      "Baby Showers",
+      "Graduation Parties",
+      "Retirement Parties",
+      "Holiday Parties",
+      "Celebration of Life"
+    ],
+    timeline: [
+      { phase: "Phase 1: Theme selection", title: "Color Schemes & Backdrop Layouts", body: "Drafting color palettes, custom neon slogans, and table decoration styles suitable for the milestone." },
+      { phase: "Phase 2: Dress", title: "Atmospheric Setup", body: "Suspending balloon arches, setting up dessert counters, putting up photo screens, and arranging cocktail bars." },
+      { phase: "Phase 3: Toast", title: "Milestone Celebration & Toast", body: "Coordinating cake cutting, managing champagne towers, and running MC speeches." },
+      { phase: "Phase 4: Dance", title: "Interactive DJ & Socializing", body: "Activating outdoor fairy-lit dance floors and live DJ arrays to close the celebration." }
+    ]
+  },
+  productions: {
+    category: "Productions",
+    title: "Creative Shoots & Functions",
+    intro: "Engineering large-scale structural stage setups and high-fidelity video recording environments for media and corporate functions.",
+    subtypes: [
+      "Photography Shoots",
+      "Video Shoots",
+      "Annual Functions"
+    ],
+    timeline: [
+      { phase: "Phase 1: Storyboard", title: "Shoot Mapping & Timing", body: "Aligning camera schedules, lighting angles, and backdrop displacements for perfect capture frames." },
+      { phase: "Phase 2: Rigging", title: "Trussing & Lighting Rigs", body: "Installing complex overhead light trusses, softboxes, background screens, and multi-cam platforms." },
+      { phase: "Phase 3: Recording", title: "Performance Capture", body: "Managing direct audio outputs, camera crane swings, and live action cues for flawless takes." },
+      { phase: "Phase 4: Render", title: "Post-Production Delivery", body: "Color grading, cinematic edit cuts, and delivering high-fidelity digital media folders." }
+    ]
+  }
+};
+
+let threeGlobal = {
+  camera: null,
+  scene: null,
+  renderer: null,
+  sculpture: null,
+  sculptureContainer: null,
+  particles: null,
+  targetFov: 45,
+  originalPositions: [],
+  clock: new THREE.Clock()
+};
+
+/* ==========================================
+   2. THREE.JS 3D ENGINE
+   ========================================== */
+function initThreeEngine() {
+  const canvas = document.getElementById('webgl-canvas');
+  if (!canvas) return;
+
+  // Scene
+  const scene = new THREE.Scene();
+  threeGlobal.scene = scene;
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 8;
+  threeGlobal.camera = camera;
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: false
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setClearColor(0x070707, 1); // Matches CSS --bg-dark
+  threeGlobal.renderer = renderer;
+
+  // Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.35); // Dim ambient to emphasize specular gold highlights
+  scene.add(ambientLight);
+
+  // Key light with shadow mapping (warm gold spotlight)
+  const dirLight = new THREE.DirectionalLight(0xfff5e0, 1.3);
+  dirLight.position.set(10, 15, 10);
+  dirLight.castShadow = true;
+  dirLight.shadow.mapSize.width = 1024;
+  dirLight.shadow.mapSize.height = 1024;
+  dirLight.shadow.camera.near = 0.5;
+  dirLight.shadow.camera.far = 40;
+  dirLight.shadow.bias = -0.001;
+  scene.add(dirLight);
+
+  // Fill Light from opposite side (softer gold fill)
+  const fillLight = new THREE.DirectionalLight(0xb58e3d, 0.95);
+  fillLight.position.set(-10, -5, -5);
+  scene.add(fillLight);
+
+  // Group container for sculpture to handle mouse tilt
+  const sculptureContainer = new THREE.Group();
+  scene.add(sculptureContainer);
+  threeGlobal.sculptureContainer = sculptureContainer;
+
+  // Procedural Gold Sculpture
+  // Icosahedron with high subdivisions allows organic morphing displacement
+  const geometry = new THREE.IcosahedronGeometry(2.2, 5);
+  
+  // Store original vertex coordinates to apply sin/cos offset formulas
+  const positionAttribute = geometry.attributes.position;
+  const tempVertex = new THREE.Vector3();
+  for (let i = 0; i < positionAttribute.count; i++) {
+    tempVertex.fromBufferAttribute(positionAttribute, i);
+    threeGlobal.originalPositions.push(tempVertex.clone());
+  }
+
+  // Premium reflective metallic gold material
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xD4AF37, // Gold base
+    roughness: 0.22, // Smooth reflective surface
+    metalness: 0.95, // High metalness for reflections
+    flatShading: false
+  });
+
+  const sculpture = new THREE.Mesh(geometry, material);
+  sculpture.castShadow = true;
+  sculpture.receiveShadow = true;
+  sculptureContainer.add(sculpture);
+  threeGlobal.sculpture = sculpture;
+
+  // Atmospheric Gold Particle System (250 floating particles)
+  const particleCount = 250;
+  const particleGeometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 12; // X
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 12; // Y
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 12; // Z
+  }
+  particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  
+  const particleMaterial = new THREE.PointsMaterial({
+    color: 0xD4AF37,
+    size: 0.038, // Slightly smaller for delicate elegance
+    transparent: true,
+    opacity: 0.55, // Softer alpha
+    sizeAttenuation: true,
+    blending: THREE.AdditiveBlending, // Elegant overlapping glows
+    depthWrite: false // Avoid blocky overlay clippings with standard meshes
+  });
+  
+  const particles = new THREE.Points(particleGeometry, particleMaterial);
+  scene.add(particles);
+  threeGlobal.particles = particles;
+
+  // Handle Resize
+  window.addEventListener('resize', onWindowResize);
+
+  // Handle Mouse Tilt (Parallax)
+  let mouseX = 0, mouseY = 0;
+  let targetRotationX = 0, targetRotationY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    // Normalize coordinates (-1 to 1)
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    
+    // Set target rotations based on cursor
+    targetRotationX = mouseY * 0.35;
+    targetRotationY = mouseX * 0.35;
+  });
+
+  // Handle Scroll Transition (Morph position/scale)
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const scrollPercent = Math.min(1, scrollY / viewportHeight);
+    
+    // Lerp-like scale reduction and push to the right corner
+    const scaleFactor = 1 - (scrollPercent * 0.55); // Scales down from 1 to 0.45
+    sculptureContainer.scale.setScalar(scaleFactor);
+    
+    // Push the 3D model to the right side on PC view
+    if (window.innerWidth > 768) {
+      sculptureContainer.position.x = scrollPercent * 3.8;
+      sculptureContainer.position.y = scrollPercent * 0.5;
+    } else {
+      // Stack under title on mobile view
+      sculptureContainer.position.x = 0;
+      sculptureContainer.position.y = -scrollPercent * 1.5;
+    }
+  });
+
+  // Animation Frame Loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    const time = threeGlobal.clock.getElapsedTime();
+    const posAttr = geometry.attributes.position;
+    const v = new THREE.Vector3();
+
+    // 1. Procedural Clay Blob Morphing Formula
+    for (let i = 0; i < posAttr.count; i++) {
+      const orig = threeGlobal.originalPositions[i];
+      // Wave displacement mathematics
+      const wave = Math.sin(orig.x * 0.85 + time * 1.1) * 
+                   Math.cos(orig.y * 0.85 + time * 0.95) * 
+                   Math.sin(orig.z * 0.85 + time * 0.7) * 0.38;
+                   
+      v.copy(orig).normalize().multiplyScalar(2.2 + wave);
+      posAttr.setXYZ(i, v.x, v.y, v.z);
+    }
+    posAttr.needsUpdate = true;
+    geometry.computeVertexNormals();
+
+    // 2. Continuous Base Rotation
+    sculpture.rotation.y += 0.003;
+    sculpture.rotation.x += 0.0025;
+
+    // 3. Smooth Mouse-Move Parallax Tilt (lerping)
+    sculptureContainer.rotation.x += (targetRotationX - sculptureContainer.rotation.x) * 0.08;
+    sculptureContainer.rotation.y += (targetRotationY - sculptureContainer.rotation.y) * 0.08;
+
+    // 4. Smooth Camera Zoom (for modal trigger)
+    camera.fov += (threeGlobal.targetFov - camera.fov) * 0.08;
+    camera.updateProjectionMatrix();
+
+    // 5. Atmospheric Gold Particles organic floating drift & wobble
+    if (threeGlobal.particles) {
+      const positions = threeGlobal.particles.geometry.attributes.position.array;
+      const count = positions.length / 3;
+      
+      for (let i = 0; i < count; i++) {
+        const i3 = i * 3;
+        // Pseudo-random speeds based on point index
+        const speedY = 0.002 + (i % 6) * 0.0008; // Gentle upward drift
+        const wobbleSpeed = 0.4 + (i % 3) * 0.25;
+        const wobbleScale = 0.0018 + (i % 4) * 0.0006;
+        
+        // Upward movement
+        positions[i3 + 1] += speedY;
+        // Float wiggles
+        positions[i3] += Math.sin(time * wobbleSpeed + i) * wobbleScale;
+        positions[i3 + 2] += Math.cos(time * wobbleSpeed * 0.8 + i) * wobbleScale;
+        
+        // Recycle particle to bottom when it drifts past top viewport threshold (Y > 6)
+        if (positions[i3 + 1] > 6) {
+          positions[i3 + 1] = -6;
+          positions[i3] = (Math.random() - 0.5) * 12;
+          positions[i3 + 2] = (Math.random() - 0.5) * 12;
+        }
+      }
+      threeGlobal.particles.geometry.attributes.position.needsUpdate = true;
+      
+      // Slow background cosmic rotation
+      threeGlobal.particles.rotation.y = time * 0.015;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+function onWindowResize() {
+  const camera = threeGlobal.camera;
+  const renderer = threeGlobal.renderer;
+  if (!camera || !renderer) return;
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+/* ==========================================
+   3. SCROLL REVEALS (CARDS GRID)
+   ========================================== */
+function initUIScrollReveals() {
+  const elements = document.querySelectorAll('.showcase-card, .timeline-card');
+  if (elements.length === 0) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // Add slightly delayed stagger for portfolio showcase cards
+        if (entry.target.classList.contains('showcase-card')) {
+          const cards = document.querySelectorAll('.showcase-card');
+          const index = Array.from(cards).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${index * 0.15}s`;
+        }
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.15
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+/* ==========================================
+   4. CARD CLICK CAMERA ZOOM NAVIGATOR
+   ========================================== */
+function initCardClickZoom() {
+  const cards = document.querySelectorAll('.showcase-card');
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault(); // Pause standard navigation
+      const targetUrl = card.getAttribute('href');
+      
+      // Trigger Three.js Zoom-In Camera Animation
+      threeGlobal.targetFov = 20; // Tight zoom
+      
+      // Delay navigation to let zoom transition complete
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 550);
+    });
+  });
+}
+
+/* ==========================================
+   5. TIMELINE EVENT FLOW SCROLL ANIMATION
+   ========================================== */
+function initTimelineProgressFlow() {
+  const timelineBox = document.querySelector('.timeline-box');
+  const flowLine = document.querySelector('.timeline-flow-line');
+  if (!timelineBox || !flowLine) return;
+
+  const updateFlow = () => {
+    const boxRect = timelineBox.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Calculate scroll percentage of the timeline container relative to the screen height
+    // We trigger the flow as the container moves up past 75% of the viewport height
+    const startPoint = windowHeight * 0.75;
+    const totalHeight = boxRect.height;
+    const scrolled = startPoint - boxRect.top;
+    
+    let percent = (scrolled / totalHeight) * 100;
+    percent = Math.max(0, Math.min(100, percent));
+    
+    flowLine.style.height = `${percent}%`;
+    
+    // Highlight passed nodes and animate elements as they enter the flow
+    const cards = timelineBox.querySelectorAll('.timeline-card');
+    cards.forEach(card => {
+      const cardRect = card.getBoundingClientRect();
+      // If the top of the card has passed the startPoint threshold, mark as passed
+      if (cardRect.top < startPoint) {
+        card.classList.add('flow-passed');
+      } else {
+        card.classList.remove('flow-passed');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateFlow);
+  window.addEventListener('resize', updateFlow);
+  updateFlow(); // Trigger initial execution
+}
+
