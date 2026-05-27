@@ -57,11 +57,21 @@
         <h2 class="section-title">Our Event Architectures</h2>
       </div>
 
-      <!-- Grid of 5 primary cards representing the 19 event types -->
+      <!-- Tab Switcher -->
+      <div class="exhibit-filter interactive-el">
+        <button class="filter-btn active" data-filter="adults">Adults Exhibitions</button>
+        <button class="filter-btn" data-filter="children">Children's Celebrations</button>
+      </div>
+
+      <!-- Grid of primary cards -->
       <div class="cards-grid interactive-el">
         
+        <!-- ==========================================
+             ADULTS EXHIBITIONS
+             ========================================== -->
+             
         <!-- Card 1: Corporate -->
-        <a href="corporate.html" class="showcase-card" data-category="corporate">
+        <a href="corporate.html" class="showcase-card" data-category="corporate" data-group="adults">
           <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800');"></div>
           <span class="card-num">01</span>
           <div class="card-content">
@@ -75,7 +85,7 @@
         </a>
 
         <!-- Card 2: Brand & Launches -->
-        <a href="promotions.html" class="showcase-card" data-category="promotions">
+        <a href="promotions.html" class="showcase-card" data-category="promotions" data-group="adults">
           <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800');"></div>
           <span class="card-num">02</span>
           <div class="card-content">
@@ -89,7 +99,7 @@
         </a>
 
         <!-- Card 3: Weddings -->
-        <a href="wedding.html" class="showcase-card" data-category="weddings">
+        <a href="wedding.html" class="showcase-card" data-category="weddings" data-group="adults">
           <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800');"></div>
           <span class="card-num">03</span>
           <div class="card-content">
@@ -103,7 +113,7 @@
         </a>
 
         <!-- Card 4: Private Parties -->
-        <a href="parties.html" class="showcase-card" data-category="parties">
+        <a href="parties.html" class="showcase-card" data-category="parties" data-group="adults">
           <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800');"></div>
           <span class="card-num">04</span>
           <div class="card-content">
@@ -117,12 +127,58 @@
         </a>
 
         <!-- Card 5: Productions -->
-        <a href="productions.html" class="showcase-card" data-category="productions">
+        <a href="productions.html" class="showcase-card" data-category="productions" data-group="adults">
           <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');"></div>
           <span class="card-num">05</span>
           <div class="card-content">
             <h3 class="card-title">Productions</h3>
             <p class="card-desc">Bespoke photography and video shoots, commercial sets, and massive annual functions coordinated with advanced AV setups and lighting schemes.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- ==========================================
+             CHILDREN'S CELEBRATIONS
+             ========================================== -->
+
+        <!-- Card 6: Kids' Birthday Galas -->
+        <a href="kids-birthdays.html" class="showcase-card" data-category="kids-birthdays" data-group="children" style="display: none;">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800');"></div>
+          <span class="card-num">01</span>
+          <div class="card-content">
+            <h3 class="card-title">Kids' Birthday Galas</h3>
+            <p class="card-desc">Enchanting themed birthday parties, magical stage decors, interactive kids' play zones, cartoon mascots, and custom-styled dessert stations.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 7: Baby Showers & Reveals -->
+        <a href="baby-showers.html" class="showcase-card" data-category="baby-showers" data-group="children" style="display: none;">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800');"></div>
+          <span class="card-num">02</span>
+          <div class="card-content">
+            <h3 class="card-title">Baby Showers &amp; Reveals</h3>
+            <p class="card-desc">Heartwarming traditional baby showers, high-impact gender reveal stages (FX smoke/confetti), floral canopies, and high-tea buffet setups.</p>
+            <div class="card-footer">
+              <span>Explore Walkthrough</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 8: Christenings & Communions -->
+        <a href="christenings.html" class="showcase-card" data-category="christenings" data-group="children" style="display: none;">
+          <div class="card-bg-img" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800');"></div>
+          <span class="card-num">03</span>
+          <div class="card-content">
+            <h3 class="card-title">Christenings &amp; Communions</h3>
+            <p class="card-desc">Holy baptisms, traditional naming ceremonies, first holy communions, elegant cradle styling, and family dinner layout coordinates.</p>
             <div class="card-footer">
               <span>Explore Walkthrough</span>
               <i class="fa-solid fa-arrow-right-long"></i>
@@ -168,16 +224,6 @@
             <div class="input-box">
               <input type="text" id="event" placeholder=" ">
               <label for="event">Event Category (e.g. Seminar)</label>
-            </div>
-            <div class="form-row">
-              <div class="input-box">
-                <input type="number" id="adults" min="0" placeholder=" ">
-                <label for="adults">Adult Guests</label>
-              </div>
-              <div class="input-box">
-                <input type="number" id="children" min="0" placeholder=" ">
-                <label for="children">Child Guests</label>
-              </div>
             </div>
             <div class="input-box">
               <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initUIScrollReveals();
   initCardClickZoom();
   initTimelineProgressFlow();
+  initExhibitFiltering();
 });
 
 /* ==========================================
@@ -424,4 +425,60 @@ function initTimelineProgressFlow() {
   window.addEventListener('resize', updateFlow);
   updateFlow(); // Trigger initial execution
 }
+
+/* ==========================================
+   6. EXHIBIT CATEGORY FILTER SYSTEM (ADULTS VS CHILDREN)
+   ========================================== */
+function initExhibitFiltering() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.showcase-card');
+  if (filterBtns.length === 0 || cards.length === 0) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Avoid double triggering if already active
+      if (btn.classList.contains('active')) return;
+
+      // Toggle active states on button pills
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      // Staggered fade out of all current cards
+      cards.forEach(card => {
+        card.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+      });
+
+      // Wait for fade out to complete, then change visibility and fade back in
+      setTimeout(() => {
+        let visibleIdx = 0;
+        cards.forEach(card => {
+          const group = card.getAttribute('data-group');
+          
+          if (group === filterValue) {
+            card.style.display = 'flex';
+            // Reflow trigger
+            card.offsetHeight;
+
+            // Apply card scroll reveal styles with staggered delays
+            card.style.transitionDelay = `${visibleIdx * 0.1}s`;
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+            
+            // Re-add revealed class for scroll reveals
+            card.classList.add('revealed');
+            visibleIdx++;
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('revealed');
+          }
+        });
+      }, 420);
+    });
+  });
+}
+
 
