@@ -719,6 +719,22 @@ header {
   margin-bottom: 30px;
 }
 
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .input-box {
+  flex: 1;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
 .input-box input,
 .input-box textarea {
   width: 100%;
