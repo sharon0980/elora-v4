@@ -176,6 +176,28 @@ header {
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
+.gallery-nav {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.gallery-nav a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: var(--transition-fast);
+}
+
+.gallery-nav a:hover {
+  opacity: 1;
+  color: var(--color-gold);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
 /* ==========================================
    HERO / FRONT PAGE
    ========================================== */
@@ -891,6 +913,10 @@ footer {
   
   .nav-links {
     display: none;
+  }
+
+  .gallery-nav {
+    display: flex !important; /* Keep back button visible on mobile header */
   }
   
   .hero-section {

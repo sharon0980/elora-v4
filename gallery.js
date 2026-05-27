@@ -291,14 +291,23 @@ function build3DHTMLCards() {
   if (!container) return;
 
   const count = EXHIBITIONS_LIST.length;
+  const isMobile = window.innerWidth < 768;
 
   EXHIBITIONS_LIST.forEach((item, idx) => {
-    // Generate spiral coordinates to form a tunnel
-    const angle = idx * 0.95; // angle step
-    const radius = 6.2 + (idx % 2 === 0 ? 1.2 : -1.2); // cylindrical radius
-    
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+    let x, y;
+    if (isMobile) {
+      // Elegant staggered center-flight layout for mobile portrait viewports
+      const angle = idx * 1.5; // spiral angle
+      const radius = 1.35; // tight radius to fit mobile viewport width
+      x = Math.cos(angle) * radius;
+      y = Math.sin(angle) * radius * 1.2; // slightly taller vertically
+    } else {
+      // Original wide PC spiral tunnel coordinates
+      const angle = idx * 0.95; // angle step
+      const radius = 6.2 + (idx % 2 === 0 ? 1.2 : -1.2); // cylindrical radius
+      x = Math.cos(angle) * radius;
+      y = Math.sin(angle) * radius;
+    }
     
     // Spread Z depth evenly from Z = -70 (deepest) to Z = 50 (closest)
     const z = 50 - (idx / count) * 110;
@@ -367,6 +376,13 @@ function initListeners() {
       document.getElementById('brief-popup').classList.remove('active');
     }
   });
+
+  // Update mobile instructions dynamically
+  const isMobile = window.innerWidth < 768;
+  const instructionEl = document.querySelector('.gallery-instruction span');
+  if (instructionEl && isMobile) {
+    instructionEl.innerHTML = "Scroll to Fly • Auto-Weaving View • Tap to Inspect";
+  }
 }
 
 // Open modal and load detail fields dynamically
@@ -387,6 +403,13 @@ function animate() {
   requestAnimationFrame(animate);
 
   const time = clock.getElapsedTime();
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile) {
+    // Gently wave/tilt camera target coordinates automatically over time on mobile
+    targetX = Math.sin(time * 0.4) * 0.9;
+    targetY = Math.cos(time * 0.35) * 0.5;
+  }
 
   // 1. Lerp Camera Position (Scroll flight + Cursor Parallax tilt)
   camera.position.z += (targetZ - camera.position.z) * 0.1;
@@ -451,8 +474,12 @@ function animate() {
       const py = (tempV.y * -0.5 + 0.5) * window.innerHeight;
 
       // Scale card size and opacity based on depth distance
-      // Opposing depth: closer = bigger, further = smaller
-      const scale = Math.max(0.45, Math.min(1.8, 9.5 / distToCam));
+      // PC limits: range [0.45, 1.8], factor 9.5
+      // Mobile limits: range [0.35, 1.0], factor 5.5 (prevents screen clipping)
+      const baseScale = isMobile ? 5.5 : 9.5;
+      const maxScale = isMobile ? 1.0 : 1.8;
+      const minScale = isMobile ? 0.35 : 0.45;
+      const scale = Math.max(minScale, Math.min(maxScale, baseScale / distToCam));
       
       // Soft fade limits (blend into background void)
       let opacity = 1.0;
