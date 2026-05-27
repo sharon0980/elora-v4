@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elora Eventos - Bespoke &amp; Custom Events Walkthrough. View structural phase setups for tailored conceptual events.">
+  <title>Bespoke &amp; Custom Events Walkthrough | ELORA EVENTOS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- THREE.JS BACKGROUND CANVAS -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <div class="content-wrapper">
+    
+    <!-- NAVIGATION -->
+    <header class="interactive-el">
+      <a href="index.html" class="brand-logo" style="text-decoration:none; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Elora Eventos Logo" style="height: 30px; width: auto; display: inline-block;">
+        <span>Elora Eventos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Exhibition</a></li>
+        <li><a href="index.html#gallery">Showcases</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- MAIN DETAIL CONTENT -->
+    <main class="detail-page-container interactive-el">
+      
+      <!-- Back to Gallery Link -->
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i> Back to Gallery
+      </a>
+
+      <!-- Header Content -->
+      <div class="modal-header">
+        <span class="modal-category">Exhibition 06</span>
+        <h1 class="modal-title">Bespoke &amp; Custom Events</h1>
+        <p class="modal-intro">We translate your wildest event imaginations, custom milestones, and conceptual themes into high-end physical spaces custom-engineered from the ground up.</p>
+      </div>
+
+      <!-- Specific Categories tags -->
+      <div class="subtypes-box">
+        <h4 class="subtypes-title">Specializations Offered</h4>
+        <ul class="subtypes-list">
+          <li>Tailored Concept Development</li>
+          <li>Niche Galas & Private Soirées</li>
+          <li>Bespoke Theme Assemblies</li>
+          <li>3D Concept Modeling & Layouts</li>
+          <li>Specialty Prop & AV Rigging</li>
+        </ul>
+      </div>
+
+      <!-- Walkthrough Timeline -->
+      <div class="walkthrough-map">
+        <h3 class="walkthrough-header">Structure Walkthrough</h3>
+        <div class="timeline-box">
+          <div class="timeline-flow-line"></div>
+          
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 01: Consultation</span>
+            <h4 class="timeline-heading">Atelier Brainstorming &amp; Brief</h4>
+            <p class="timeline-body">Collaborating in detailed briefing sessions to extract unique theme motifs, structural references, sound parameters, and conceptual story boards.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=800" alt="Consultation & Idea Building">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 02: Visualization</span>
+            <h4 class="timeline-heading">3D Simulation &amp; Rendering</h4>
+            <p class="timeline-body">Drafting high-fidelity 3D structural stage mockups, spatial lighting projections, and path layout guides to pre-visualize details.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800" alt="3D Space Simulation">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 03: Fabrication</span>
+            <h4 class="timeline-heading">Custom Material &amp; Prop Build</h4>
+            <p class="timeline-body">Constructing specialty wood/metal rigs, fabricating bespoke decor elements, sourcing custom lighting filters, and assembling stage coordinates.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800" alt="Bespoke Rig Construction">
+          </div>
+
+          <div class="timeline-card">
+            <span class="timeline-phase">Phase 04: Execution</span>
+            <h4 class="timeline-heading">Atelier Day Coordination</h4>
+            <p class="timeline-body">On-site directors manage show-day timeline schedules, execute special FX sequences, manage guest coordinates, and run seamless wraps.</p>
+            <img class="timeline-img" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800" alt="Event Execution Showcase">
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="contact-layout interactive-el">
+        <div class="contact-text">
+          <h2>Design Your Masterpiece</h2>
+          <p>Whether it is an industrial summit or a royal ceremony, our consultants are ready to conceptualize your visual layouts and coordinate execution.</p>
+          <ul class="contact-briefs">
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-val">+91 98765 43210</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-val">atelier@eloraeventos.com</div>
+            </li>
+            <li class="contact-brief-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-val">Panampilly Nagar, Kochi, Kerala</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form onsubmit="event.preventDefault(); alert('We have received your request. An Elora consultant will contact you with a 3D concept layout outline.');">
+            <div class="input-box">
+              <input type="text" id="name" placeholder=" " required>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-box">
+              <input type="email" id="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <input type="text" id="event" value="Bespoke & Custom Events" placeholder=" " readonly>
+              <label for="event">Event Category</label>
+            </div>
+            <div class="input-box">
+              <textarea id="message" rows="4" placeholder=" " style="resize:none;" required></textarea>
+              <label for="message">Vision Outline</label>
+            </div>
+            <button type="submit" class="submit-btn">Consult Our Atelier</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2026 Elora Eventos. Monochromatic 3D Virtual Gallery. Kochi, Kerala.
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
