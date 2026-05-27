@@ -167,31 +167,118 @@ function initThreeEngine() {
   scene.add(sculptureContainer);
   threeGlobal.sculptureContainer = sculptureContainer;
 
-  // Procedural Gold Sculpture
-  // Icosahedron with high subdivisions allows organic morphing displacement
-  const geometry = new THREE.IcosahedronGeometry(2.2, 5);
-  
-  // Store original vertex coordinates to apply sin/cos offset formulas
-  const positionAttribute = geometry.attributes.position;
-  const tempVertex = new THREE.Vector3();
-  for (let i = 0; i < positionAttribute.count; i++) {
-    tempVertex.fromBufferAttribute(positionAttribute, i);
-    threeGlobal.originalPositions.push(tempVertex.clone());
-  }
-
-  // Premium reflective metallic gold material
-  const material = new THREE.MeshStandardMaterial({
-    color: 0xD4AF37, // Gold base
-    roughness: 0.22, // Smooth reflective surface
-    metalness: 0.95, // High metalness for reflections
-    flatShading: false
+  // Procedural Gold Sculpture: The "Cosmic Astrolabe" (Celestial Armillary Sphere)
+  // Consists of a central pulsing dodecahedron, three independent gold orbits with satellite spheres, and intersecting coordinate rods.
+  const astrolabeMaterial = new THREE.MeshStandardMaterial({
+    color: 0xD4AF37,
+    roughness: 0.15,
+    metalness: 0.95,
+    side: THREE.DoubleSide
   });
 
-  const sculpture = new THREE.Mesh(geometry, material);
-  sculpture.castShadow = true;
-  sculpture.receiveShadow = true;
-  sculptureContainer.add(sculpture);
-  threeGlobal.sculpture = sculpture;
+  // 1. Central Crystalline Core (dodecahedron)
+  const coreGeom = new THREE.DodecahedronGeometry(0.9, 0);
+  const coreMat = new THREE.MeshStandardMaterial({
+    color: 0xD4AF37,
+    roughness: 0.1,
+    metalness: 0.92,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.75
+  });
+  const astrolabeCore = new THREE.Mesh(coreGeom, coreMat);
+  astrolabeCore.castShadow = true;
+  sculptureContainer.add(astrolabeCore);
+  threeGlobal.astrolabeCore = astrolabeCore;
+
+  // 2. Intersecting Structural Coordinate Rods with end caps
+  const rodMat = new THREE.MeshStandardMaterial({
+    color: 0xD4AF37,
+    roughness: 0.22,
+    metalness: 0.92
+  });
+  const capGeom = new THREE.SphereGeometry(0.07, 16, 16);
+  const rodLength = 6.2;
+
+  // X-axis rod
+  const rodXGeom = new THREE.CylinderGeometry(0.015, 0.015, rodLength, 8);
+  const rodX = new THREE.Mesh(rodXGeom, rodMat);
+  rodX.rotation.z = Math.PI / 2;
+  sculptureContainer.add(rodX);
+
+  // Y-axis rod
+  const rodYGeom = new THREE.CylinderGeometry(0.015, 0.015, rodLength, 8);
+  const rodY = new THREE.Mesh(rodYGeom, rodMat);
+  sculptureContainer.add(rodY);
+
+  // Z-axis rod
+  const rodZGeom = new THREE.CylinderGeometry(0.015, 0.015, rodLength, 8);
+  const rodZ = new THREE.Mesh(rodZGeom, rodMat);
+  rodZ.rotation.x = Math.PI / 2;
+  sculptureContainer.add(rodZ);
+
+  // End caps
+  const capPositions = [
+    [rodLength / 2, 0, 0],
+    [-rodLength / 2, 0, 0],
+    [0, rodLength / 2, 0],
+    [0, -rodLength / 2, 0],
+    [0, 0, rodLength / 2],
+    [0, 0, -rodLength / 2]
+  ];
+  capPositions.forEach(pos => {
+    const cap = new THREE.Mesh(capGeom, rodMat);
+    cap.position.set(pos[0], pos[1], pos[2]);
+    sculptureContainer.add(cap);
+  });
+
+  // 3. Three Concentric Tilted Orbital Rings & Orbiting Satellite Spheres
+  const orbits = [];
+  const orbitCount = 3;
+  const orbitRadii = [1.5, 2.15, 2.8];
+  const orbitSpeeds = [0.65, 0.45, 0.3];
+  
+  for (let i = 0; i < orbitCount; i++) {
+    const radius = orbitRadii[i];
+    const tubeRadius = 0.028;
+    const ringGeom = new THREE.TorusGeometry(radius, tubeRadius, 16, 100);
+    const ringMesh = new THREE.Mesh(ringGeom, astrolabeMaterial);
+    ringMesh.castShadow = true;
+    ringMesh.receiveShadow = true;
+    
+    // Position/tilt orbits on distinct planes
+    if (i === 0) ringMesh.rotation.x = Math.PI / 3.5;
+    if (i === 1) ringMesh.rotation.y = Math.PI / 4.5;
+    if (i === 2) {
+      ringMesh.rotation.x = Math.PI / 6;
+      ringMesh.rotation.y = Math.PI / 6;
+    }
+    
+    sculptureContainer.add(ringMesh);
+    
+    // Satellite Sphere gliding along this orbital ring
+    const satGeom = new THREE.SphereGeometry(0.1, 32, 32);
+    const satMat = new THREE.MeshStandardMaterial({
+      color: 0xD4AF37,
+      roughness: 0.05,
+      metalness: 0.98
+    });
+    const satMesh = new THREE.Mesh(satGeom, satMat);
+    satMesh.castShadow = true;
+    satMesh.receiveShadow = true;
+    ringMesh.add(satMesh); // Add as child of the ring mesh
+    
+    orbits.push({
+      ring: ringMesh,
+      satellite: satMesh,
+      radius: radius,
+      orbitSpeed: orbitSpeeds[i],
+      rotSpeedX: 0.2 + i * 0.15,
+      rotSpeedY: 0.25 - i * 0.08,
+      rotSpeedZ: 0.15 + i * 0.12
+    });
+  }
+  threeGlobal.orbits = orbits;
 
   // Atmospheric Gold Particle System (250 floating particles)
   const particleCount = 250;
@@ -261,26 +348,30 @@ function initThreeEngine() {
     requestAnimationFrame(animate);
 
     const time = threeGlobal.clock.getElapsedTime();
-    const posAttr = geometry.attributes.position;
-    const v = new THREE.Vector3();
-
-    // 1. Procedural Clay Blob Morphing Formula
-    for (let i = 0; i < posAttr.count; i++) {
-      const orig = threeGlobal.originalPositions[i];
-      // Wave displacement mathematics
-      const wave = Math.sin(orig.x * 0.85 + time * 1.1) * 
-                   Math.cos(orig.y * 0.85 + time * 0.95) * 
-                   Math.sin(orig.z * 0.85 + time * 0.7) * 0.38;
-                   
-      v.copy(orig).normalize().multiplyScalar(2.2 + wave);
-      posAttr.setXYZ(i, v.x, v.y, v.z);
+    // 1. Procedural Astrolabe kinetics: core pulsing and rotations
+    if (threeGlobal.astrolabeCore) {
+      // Pulse scale gently over time
+      const pulse = 1.0 + Math.sin(time * 1.5) * 0.08;
+      threeGlobal.astrolabeCore.scale.setScalar(pulse);
+      // Slow structural rotation
+      threeGlobal.astrolabeCore.rotation.x += 0.005;
+      threeGlobal.astrolabeCore.rotation.y += 0.007;
     }
-    posAttr.needsUpdate = true;
-    geometry.computeVertexNormals();
 
-    // 2. Continuous Base Rotation
-    sculpture.rotation.y += 0.003;
-    sculpture.rotation.x += 0.0025;
+    if (threeGlobal.orbits) {
+      threeGlobal.orbits.forEach(orbit => {
+        // Rotate the orbit ring mesh
+        orbit.ring.rotation.x += 0.002 * orbit.rotSpeedX;
+        orbit.ring.rotation.y += 0.003 * orbit.rotSpeedY;
+        orbit.ring.rotation.z += 0.001 * orbit.rotSpeedZ;
+
+        // Glide the satellite sphere along its local circular orbit track
+        const angle = time * orbit.orbitSpeed;
+        orbit.satellite.position.x = Math.cos(angle) * orbit.radius;
+        orbit.satellite.position.y = Math.sin(angle) * orbit.radius;
+        orbit.satellite.position.z = 0;
+      });
+    }
 
     // 3. Smooth Mouse-Move Parallax Tilt (lerping)
     sculptureContainer.rotation.x += (targetRotationX - sculptureContainer.rotation.x) * 0.08;

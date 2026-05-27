@@ -237,44 +237,72 @@ function initThree() {
   dirLight1.position.set(5, 10, 20);
   scene.add(dirLight1);
 
-  // Cosmic gold dust particles
+  // Cosmic gold dust particles organized in a Double Helix
+  const isMobile = window.innerWidth < 768;
   const particleCount = 500;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
+  const helixRadius = isMobile ? 4.2 : 8.5;
 
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 15; // X
-    positions[i + 1] = (Math.random() - 0.5) * 15; // Y
-    positions[i + 2] = (Math.random() - 0.5) * 150; // Z spread along flight path
+  for (let i = 0; i < particleCount; i++) {
+    // Spaced Z along the flight corridor from Z = -100 to Z = 70
+    const z = 70 - (i / particleCount) * 170;
+    const angle = z * 0.12; // spiral angle speed
+    const spiralOffset = (i % 2 === 0) ? 0 : Math.PI; // offset for double helix
+    
+    // Slight random deviation to form a starry path
+    const noiseX = (Math.random() - 0.5) * 1.8;
+    const noiseY = (Math.random() - 0.5) * 1.8;
+    const noiseZ = (Math.random() - 0.5) * 3.0;
+
+    positions[i * 3] = Math.cos(angle + spiralOffset) * helixRadius + noiseX;
+    positions[i * 3 + 1] = Math.sin(angle + spiralOffset) * helixRadius + noiseY;
+    positions[i * 3 + 2] = z + noiseZ;
   }
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  const material = new THREE.PointsMaterial({
+  const particleMaterial = new THREE.PointsMaterial({
     color: 0xD4AF37,
-    size: 0.04,
+    size: 0.045, // Elegant fine dust
     transparent: true,
-    opacity: 0.6,
+    opacity: 0.65,
     sizeAttenuation: true,
     blending: THREE.AdditiveBlending,
     depthWrite: false
   });
 
-  particles = new THREE.Points(geometry, material);
+  particles = new THREE.Points(geometry, particleMaterial);
   scene.add(particles);
 
-  // Rotating grid wireframe cylinder (Flight Tunnel)
-  const tunnelGeom = new THREE.CylinderGeometry(8, 8, 150, 16, 30, true);
-  const tunnelMat = new THREE.MeshBasicMaterial({
+  // Rotating octagonal architectural portals (Space Truss Frames)
+  tunnel = new THREE.Group();
+  scene.add(tunnel);
+
+  const portalMat = new THREE.MeshBasicMaterial({
     color: 0xD4AF37,
     wireframe: true,
     transparent: true,
-    opacity: 0.035, // extremely subtle grid lines
+    opacity: 0.08, // Subtle luxury lines
     side: THREE.DoubleSide
   });
-  tunnel = new THREE.Mesh(tunnelGeom, tunnelMat);
-  tunnel.rotation.x = Math.PI / 2; // align along Z axis
-  scene.add(tunnel);
+
+  const portalCount = 12;
+  const portalSpacing = 15;
+  const outerRad = isMobile ? 4.5 : 9.5;
+  const innerRad = isMobile ? 2.5 : 5.5;
+
+  for (let i = 0; i < portalCount; i++) {
+    const portalZ = 70 - i * portalSpacing;
+    // Octagon portal with concentric rings and cross-braces
+    // RingGeometry(innerRadius, outerRadius, thetaSegments, phiSegments)
+    // 8 thetaSegments = octagon; 2 phiSegments = radial brace structures
+    const ringGeom = new THREE.RingGeometry(innerRad, outerRad, 8, 2);
+    const portalMesh = new THREE.Mesh(ringGeom, portalMat);
+    portalMesh.position.set(0, 0, portalZ);
+    portalMesh.rotation.z = (i * Math.PI) / 8; // spiral rotational layout
+    tunnel.add(portalMesh);
+  }
 }
 
 // Robust click tracking for elements moving in 3D WebGL space
@@ -475,9 +503,12 @@ function animate() {
     }
   }
 
-  // 2. Gently rotate flight tunnel grid lines
-  if (tunnel) {
-    tunnel.rotation.z = time * 0.015;
+  // 2. Gently rotate individual octagonal portal frames in alternating directions
+  if (tunnel && tunnel.children) {
+    tunnel.children.forEach((portal, idx) => {
+      const dir = (idx % 2 === 0) ? 1 : -1;
+      portal.rotation.z += 0.001 * dir;
+    });
   }
 
   if (isMobile) {
@@ -494,33 +525,15 @@ function animate() {
   // Gently tilt camera toward path center
   camera.lookAt(new THREE.Vector3(0, 0, camera.position.z - 15));
 
-  // Sync tunnel position entirely to camera position to keep it fixed in the frame (no drift)
+  // Center portals relative to camera X/Y to avoid edge clipping, but keep Z static so we fly through them
   if (tunnel) {
     tunnel.position.x = camera.position.x;
     tunnel.position.y = camera.position.y;
-    tunnel.position.z = camera.position.z;
   }
 
-  // 4. Cosmic particle movement
+  // 4. Cosmic particle rotation (slowly twist the double helix vortex)
   if (particles) {
-    const positionAttr = particles.geometry.attributes.position.array;
-    const count = positionAttr.length / 3;
-
-    for (let i = 0; i < count; i++) {
-      const idx3 = i * 3;
-      // Drift particles forward (toward camera view Z)
-      positionAttr[idx3 + 2] += 0.08;
-      
-      // Gentle horizontal wiggles
-      positionAttr[idx3] += Math.sin(time * 0.5 + i) * 0.002;
-
-      // Recycle particles behind camera back to deep background
-      if (positionAttr[idx3 + 2] > camera.position.z) {
-        positionAttr[idx3 + 2] = camera.position.z - 150;
-      }
-    }
-    particles.geometry.attributes.position.needsUpdate = true;
-    particles.rotation.z = time * 0.005;
+    particles.rotation.z = time * 0.012;
   }
 
   // 5. Project 3D Card Coordinates onto 2D viewport coordinates
