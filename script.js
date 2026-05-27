@@ -3,12 +3,75 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Lock scroll initially
+  document.body.classList.add('intro-active');
+
+  // Setup initial absolute center coordinates for the preloader logo
+  const introLogo = document.getElementById('intro-logo');
+  if (introLogo) {
+    const isMobile = window.innerWidth < 768;
+    const startSize = isMobile ? 120 : 200;
+    introLogo.style.width = `${startSize}px`;
+    introLogo.style.height = `${startSize}px`;
+    introLogo.style.left = `${(window.innerWidth - startSize) / 2}px`;
+    introLogo.style.top = `${(window.innerHeight - startSize) / 2}px`;
+    introLogo.style.animation = 'introLogoPulse 2.2s ease-in-out infinite alternate';
+    
+    // Force browser reflow to apply coordinates before transitions are active
+    introLogo.offsetHeight;
+
+    // Enable CSS transition properties
+    introLogo.style.transition = 'top 1.3s cubic-bezier(0.25, 1, 0.3, 1), left 1.3s cubic-bezier(0.25, 1, 0.3, 1), width 1.3s cubic-bezier(0.25, 1, 0.3, 1), height 1.3s cubic-bezier(0.25, 1, 0.3, 1), filter 1.3s cubic-bezier(0.25, 1, 0.3, 1)';
+  }
+
+  // Initialize Three.js Scene immediately so it renders behind the dark overlay
   initThreeEngine();
   initUIScrollReveals();
   initCardClickZoom();
   initTimelineProgressFlow();
   initExhibitFiltering();
+
+  // Run the preloader reveal sequence after a short delay (1.4 seconds)
+  setTimeout(runPreloaderReveal, 1400);
 });
+
+function runPreloaderReveal() {
+  const realLogo = document.querySelector('.hero-logo-img');
+  const introLogo = document.getElementById('intro-logo');
+  const overlay = document.getElementById('intro-overlay');
+  const wrapper = document.querySelector('.content-wrapper');
+  const canvas = document.getElementById('webgl-canvas');
+
+  if (!realLogo || !introLogo || !overlay) {
+    // Fallback if elements do not exist
+    document.body.classList.remove('intro-active');
+    return;
+  }
+
+  // Measure the exact layout coordinates of the hidden hero logo
+  const rect = realLogo.getBoundingClientRect();
+
+  // Fly and scale the preloader logo to match the target hero logo
+  introLogo.style.left = `${rect.left}px`;
+  introLogo.style.top = `${rect.top}px`;
+  introLogo.style.width = `${rect.width}px`;
+  introLogo.style.height = `${rect.height}px`;
+  introLogo.style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.1))';
+
+  // Fade out the black overlay
+  overlay.style.opacity = '0';
+
+  // Fade in the homepage content and 3D astrolabe background
+  if (wrapper) wrapper.classList.add('revealed');
+  if (canvas) canvas.classList.add('revealed');
+
+  // Complete preloader tear-down once transitions finish (1.3 seconds)
+  setTimeout(() => {
+    realLogo.classList.remove('hidden'); // Reveal the real inline logo
+    overlay.style.display = 'none'; // Hide preloader overlay completely
+    document.body.classList.remove('intro-active'); // Unlock scroll interaction
+  }, 1300);
+}
 
 /* ==========================================
    1. GLOBAL STATE & DATA
