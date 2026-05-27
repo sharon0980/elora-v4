@@ -6,24 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Lock scroll initially
   document.body.classList.add('intro-active');
 
-  // Setup initial absolute center coordinates for the preloader logo
-  const introLogo = document.getElementById('intro-logo');
-  if (introLogo) {
-    const isMobile = window.innerWidth < 768;
-    const startSize = isMobile ? 120 : 200;
-    introLogo.style.width = `${startSize}px`;
-    introLogo.style.height = `${startSize}px`;
-    introLogo.style.left = `${(window.innerWidth - startSize) / 2}px`;
-    introLogo.style.top = `${(window.innerHeight - startSize) / 2}px`;
-    introLogo.style.animation = 'introLogoPulse 2.2s ease-in-out infinite alternate';
-    
-    // Force browser reflow to apply coordinates before transitions are active
-    introLogo.offsetHeight;
-
-    // Enable CSS transition properties
-    introLogo.style.transition = 'top 1.3s cubic-bezier(0.25, 1, 0.3, 1), left 1.3s cubic-bezier(0.25, 1, 0.3, 1), width 1.3s cubic-bezier(0.25, 1, 0.3, 1), height 1.3s cubic-bezier(0.25, 1, 0.3, 1), filter 1.3s cubic-bezier(0.25, 1, 0.3, 1)';
-  }
-
   // Initialize Three.js Scene immediately so it renders behind the dark overlay
   initThreeEngine();
   initUIScrollReveals();
@@ -31,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimelineProgressFlow();
   initExhibitFiltering();
 
-  // Run the preloader reveal sequence after a short delay (1.4 seconds)
-  setTimeout(runPreloaderReveal, 1400);
+  // Run the preloader reveal sequence after a short delay (2.5 seconds of idle pulsing)
+  setTimeout(runPreloaderReveal, 2500);
 });
 
 function runPreloaderReveal() {
@@ -50,27 +32,34 @@ function runPreloaderReveal() {
 
   // Measure the exact layout coordinates of the hidden hero logo
   const rect = realLogo.getBoundingClientRect();
+  
+  // Calculate target center coordinates (since introLogo has translate(-50%, -50%) in CSS)
+  const targetCenterX = rect.left + rect.width / 2;
+  const targetCenterY = rect.top + rect.height / 2;
 
-  // Fly and scale the preloader logo to match the target hero logo
-  introLogo.style.left = `${rect.left}px`;
-  introLogo.style.top = `${rect.top}px`;
+  // Programmatically trigger the CSS transition on the preloader logo (slow, smooth 1.6s curve)
+  introLogo.style.transition = 'top 1.6s cubic-bezier(0.25, 1, 0.3, 1), left 1.6s cubic-bezier(0.25, 1, 0.3, 1), width 1.6s cubic-bezier(0.25, 1, 0.3, 1), height 1.6s cubic-bezier(0.25, 1, 0.3, 1), filter 1.6s cubic-bezier(0.25, 1, 0.3, 1)';
+  
+  // Morph preloader logo's dimensions and coordinates to match the target hero logo
+  introLogo.style.left = `${targetCenterX}px`;
+  introLogo.style.top = `${targetCenterY}px`;
   introLogo.style.width = `${rect.width}px`;
   introLogo.style.height = `${rect.height}px`;
   introLogo.style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.1))';
 
-  // Fade out the black overlay
+  // Fade out the black overlay (matches 1.6s transition)
   overlay.style.opacity = '0';
 
   // Fade in the homepage content and 3D astrolabe background
   if (wrapper) wrapper.classList.add('revealed');
   if (canvas) canvas.classList.add('revealed');
 
-  // Complete preloader tear-down once transitions finish (1.3 seconds)
+  // Complete preloader tear-down once transitions finish (1.6 seconds)
   setTimeout(() => {
     realLogo.classList.remove('hidden'); // Reveal the real inline logo
     overlay.style.display = 'none'; // Hide preloader overlay completely
     document.body.classList.remove('intro-active'); // Unlock scroll interaction
-  }, 1300);
+  }, 1600);
 }
 
 /* ==========================================

@@ -1596,34 +1596,41 @@ body.intro-active {
   align-items: center;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 1.3s cubic-bezier(0.25, 1, 0.3, 1);
+  transition: opacity 1.6s cubic-bezier(0.25, 1, 0.3, 1);
 }
 
 .intro-logo {
   position: absolute;
-  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.18));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(170px, 28vw, 270px); /* Large branding size */
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.18));
   z-index: 100000;
-  transition: none; /* Transition properties configured programmatically in JS to prevent initial slide */
+  animation: introLogoPulse 2.4s ease-in-out infinite alternate;
 }
 
 @keyframes introLogoPulse {
   0% {
     filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
+    opacity: 0.95;
   }
   100% {
-    filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.5));
+    filter: drop-shadow(0 0 45px rgba(212, 175, 55, 0.5));
+    opacity: 1.0;
   }
 }
 
 /* Initially hide content wrapper & WebGL astrolabe canvas during preloader */
 .content-wrapper {
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 1.6s ease-in-out;
 }
 
 #webgl-canvas {
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 1.6s ease-in-out;
 }
 
 .content-wrapper.revealed,
