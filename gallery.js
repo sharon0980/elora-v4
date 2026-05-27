@@ -494,6 +494,11 @@ function animate() {
   // Gently tilt camera toward path center
   camera.lookAt(new THREE.Vector3(0, 0, camera.position.z - 15));
 
+  // Sync tunnel position to camera position to keep it fixed in the frame
+  if (tunnel) {
+    tunnel.position.z = camera.position.z;
+  }
+
   // 4. Cosmic particle movement
   if (particles) {
     const positionAttr = particles.geometry.attributes.position.array;
