@@ -434,6 +434,24 @@ function initListeners() {
         introLogo.style.transform = `translate(-50%, -50%) translate3d(0, 0, ${logoTranslateZ}px) scale(${logoScale})`;
       }
     }
+
+    // Smooth transform / fade for centered end brand logo on scroll
+    const endLogo = document.getElementById('gallery-end-logo');
+    if (endLogo) {
+      const bottomThreshold = maxScroll - 500;
+      if (scrollY < bottomThreshold) {
+        endLogo.style.display = 'none';
+        endLogo.style.opacity = '0';
+      } else {
+        endLogo.style.display = 'flex';
+        const progress = Math.min(1, (scrollY - bottomThreshold) / 400); // Fades in fully over 400px
+        endLogo.style.opacity = progress;
+        
+        const logoScale = 0.85 + progress * 0.15; // from 0.85 to 1.0
+        const logoTranslateZ = (1 - progress) * -150; // comes from deep depth
+        endLogo.style.transform = `translate(-50%, -50%) translate3d(0, 0, ${logoTranslateZ}px) scale(${logoScale})`;
+      }
+    }
   });
 
   // Delegate mouse hover triggers for custom cursor expansion

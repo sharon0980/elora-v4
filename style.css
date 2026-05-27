@@ -1498,3 +1498,74 @@ footer {
   }
 }
 
+/* Centered End brand logo card */
+.gallery-end-logo-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 4;
+  pointer-events: none;
+  width: 90%;
+  max-width: 600px;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-end-logo-container img {
+  height: clamp(140px, 20vw, 240px);
+  width: auto;
+  margin-bottom: -10px;
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.25));
+}
+
+.gallery-end-logo-container h1 {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  color: var(--color-gold);
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+  margin-bottom: 8px;
+}
+
+.gallery-end-logo-container p {
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  margin-bottom: 40px;
+}
+
+.gallery-end-logo-container .end-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  pointer-events: auto; /* enable links/buttons clicks! */
+}
+
+.gallery-end-logo-container .end-actions .submit-btn {
+  padding: 14px 28px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  border-radius: 30px;
+  width: auto;
+}
+
+.gallery-end-logo-container .back-home-link {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--color-muted) !important;
+  transition: var(--transition-fast);
+}
+
+.gallery-end-logo-container .back-home-link:hover {
+  color: var(--color-gold) !important;
+  text-shadow: var(--shadow-gold-glow);
+}
+
