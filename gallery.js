@@ -395,13 +395,13 @@ function initListeners() {
     // Smooth transform / fade for centered intro brand logo on scroll
     const introLogo = document.getElementById('gallery-hero-logo');
     if (introLogo) {
-      if (scrollY > 350) {
+      if (scrollY > 900) {
         introLogo.style.display = 'none';
       } else {
         introLogo.style.display = 'flex';
-        const logoOpacity = Math.max(0, 1 - scrollY / 220);
-        const logoScale = Math.max(0.7, 1 - scrollY / 600);
-        const logoTranslateZ = -scrollY * 0.8;
+        const logoOpacity = Math.max(0, 1 - scrollY / 700); // Fades completely by 700px
+        const logoScale = Math.max(0.6, 1 - scrollY / 1800);
+        const logoTranslateZ = -scrollY * 0.55;
         introLogo.style.opacity = logoOpacity;
         introLogo.style.transform = `translate(-50%, -50%) translate3d(0, 0, ${logoTranslateZ}px) scale(${logoScale})`;
       }
@@ -494,8 +494,10 @@ function animate() {
   // Gently tilt camera toward path center
   camera.lookAt(new THREE.Vector3(0, 0, camera.position.z - 15));
 
-  // Sync tunnel position to camera position to keep it fixed in the frame
+  // Sync tunnel position entirely to camera position to keep it fixed in the frame (no drift)
   if (tunnel) {
+    tunnel.position.x = camera.position.x;
+    tunnel.position.y = camera.position.y;
     tunnel.position.z = camera.position.z;
   }
 
@@ -572,8 +574,8 @@ function animate() {
 
       // SENSATIONAL SCROLL REVEAL: Cards remain hidden/faded when logo is active
       const scrollY = window.scrollY;
-      if (scrollY < 220) {
-        opacity *= Math.max(0, (scrollY - 60) / 160);
+      if (scrollY < 1400) {
+        opacity *= Math.max(0, Math.min(1, (scrollY - 600) / 800));
       }
 
       // Update card inline styles

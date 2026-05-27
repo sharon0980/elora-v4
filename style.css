@@ -1102,7 +1102,7 @@ footer {
    ========================================== */
 .gallery-body {
   overflow-y: scroll;
-  min-height: 200vh; /* Scroll space for the 3D flight camera */
+  min-height: 450vh; /* Scroll space for the 3D flight camera */
   background: var(--bg-dark);
 }
 
